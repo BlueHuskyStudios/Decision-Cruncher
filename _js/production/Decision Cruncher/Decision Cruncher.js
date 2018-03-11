@@ -6,8 +6,20 @@ this['Decision Cruncher'] = function (_, Kotlin) {
   var $$importsForInline$$ = _.$$importsForInline$$ || (_.$$importsForInline$$ = {});
   var Kind_CLASS = Kotlin.Kind.CLASS;
   var Unit = Kotlin.kotlin.Unit;
+  var equals = Kotlin.equals;
+  var Kind_OBJECT = Kotlin.Kind.OBJECT;
+  var listOf = Kotlin.kotlin.collections.listOf_i5x0yv$;
+  var to = Kotlin.kotlin.to_ujzrz7$;
+  var mapOf = Kotlin.kotlin.collections.mapOf_qfcya0$;
+  var toList = Kotlin.kotlin.collections.toList_abgq59$;
+  var emptyMap = Kotlin.kotlin.collections.emptyMap_q3lmfv$;
   var defineInlineFunction = Kotlin.defineInlineFunction;
   var wrapFunction = Kotlin.wrapFunction;
+  var PropertyMetadata = Kotlin.PropertyMetadata;
+  var lazy = Kotlin.kotlin.lazy_klfg04$;
+  var Kind_INTERFACE = Kotlin.Kind.INTERFACE;
+  var toBoxedChar = Kotlin.toBoxedChar;
+  var hashCode = Kotlin.hashCode;
   var Iterator = Kotlin.kotlin.collections.Iterator;
   var throwCCE = Kotlin.throwCCE;
   var roundToInt = Kotlin.kotlin.math.roundToInt_yrwdxr$;
@@ -15,27 +27,24 @@ this['Decision Cruncher'] = function (_, Kotlin) {
   var Any = Object;
   var ReadWriteProperty = Kotlin.kotlin.properties.ReadWriteProperty;
   var ObservableProperty = Kotlin.kotlin.properties.ObservableProperty;
-  var StringBuilder = Kotlin.kotlin.text.StringBuilder;
-  var unboxChar = Kotlin.unboxChar;
-  var isWhitespace = Kotlin.kotlin.text.isWhitespace_myv2d0$;
-  var toBoxedChar = Kotlin.toBoxedChar;
   var toString = Kotlin.toString;
+  var json = Kotlin.kotlin.js.json_pyyo18$;
+  var iterator = Kotlin.kotlin.text.iterator_gw00vp$;
+  var indexOf = Kotlin.kotlin.text.indexOf_8eortd$;
+  var unboxChar = Kotlin.unboxChar;
+  var StringBuilder = Kotlin.kotlin.text.StringBuilder;
+  var isWhitespace = Kotlin.kotlin.text.isWhitespace_myv2d0$;
   var contains = Kotlin.kotlin.text.contains_li3zpu$;
-  var equals = Kotlin.equals;
   var until = Kotlin.kotlin.ranges.until_dqglrj$;
-  var Kind_OBJECT = Kotlin.Kind.OBJECT;
   var Enum = Kotlin.kotlin.Enum;
   var throwISE = Kotlin.throwISE;
   var Throwable = Error;
   var ensureNotNull = Kotlin.ensureNotNull;
-  var json = Kotlin.kotlin.js.json_pyyo18$;
-  var toList = Kotlin.kotlin.collections.toList_us0mfu$;
+  var toList_0 = Kotlin.kotlin.collections.toList_us0mfu$;
   var emptyList = Kotlin.kotlin.collections.emptyList_287e2$;
-  var PropertyMetadata = Kotlin.PropertyMetadata;
-  var lazy = Kotlin.kotlin.lazy_klfg04$;
-  var emptyMap = Kotlin.kotlin.collections.emptyMap_q3lmfv$;
   var toShort = Kotlin.toShort;
-  var Kind_INTERFACE = Kotlin.Kind.INTERFACE;
+  MutableDecision.prototype = Object.create(Decision.prototype);
+  MutableDecision.prototype.constructor = MutableDecision;
   observing$ObjectLiteral.prototype = Object.create(ObservableProperty.prototype);
   observing$ObjectLiteral.prototype.constructor = observing$ObjectLiteral;
   FiniteAmountSummary$all.prototype = Object.create(FiniteAmountSummary.prototype);
@@ -84,13 +93,241 @@ this['Decision Cruncher'] = function (_, Kotlin) {
     simpleName: 'AppViewController',
     interfaces: []
   };
+  function DecisionCrunchEngine() {
+    DecisionCrunchEngine_instance = this;
+  }
+  function DecisionCrunchEngine$crunch$lambda(closure$allRequirements, this$DecisionCrunchEngine) {
+    return function (decision, option) {
+      this$DecisionCrunchEngine.crunch_0(decision, closure$allRequirements, option);
+      return Unit;
+    };
+  }
+  var LinkedHashMap_init = Kotlin.kotlin.collections.LinkedHashMap_init_q3lmfv$;
+  DecisionCrunchEngine.prototype.crunch_n1qnm0$ = function (allRequirements, allOptions) {
+    return reduceInto(allOptions, new MutableDecision(LinkedHashMap_init()), DecisionCrunchEngine$crunch$lambda(allRequirements, this)).immutableCopy();
+  };
+  DecisionCrunchEngine.prototype.crunch_0 = function ($receiver, allRequirements, option) {
+    var $receiver_0 = $receiver.pieChart;
+    var value = this.fitness_0(option, allRequirements);
+    $receiver_0.put_xwzc9p$(option, value);
+  };
+  function DecisionCrunchEngine$fitness$lambda(closure$allRequirements) {
+    return function (fitness, f) {
+      var requirementId = f.key;
+      var conformance = f.value;
+      var tmp$;
+      var $receiver = closure$allRequirements;
+      var firstOrNull$result;
+      firstOrNull$break: do {
+        var tmp$_0;
+        tmp$_0 = $receiver.iterator();
+        while (tmp$_0.hasNext()) {
+          var element = tmp$_0.next();
+          if (equals(element.id, requirementId)) {
+            firstOrNull$result = element;
+            break firstOrNull$break;
+          }
+        }
+        firstOrNull$result = null;
+      }
+       while (false);
+      tmp$ = firstOrNull$result;
+      if (tmp$ == null) {
+        return fitness;
+      }
+      var requirement = tmp$;
+      fitness + requirement.importance * conformance;
+      return fitness;
+    };
+  }
+  DecisionCrunchEngine.prototype.fitness_0 = function ($receiver, allRequirements) {
+    return reduceTo($receiver.requirementConformance.entries, 0.0, DecisionCrunchEngine$fitness$lambda(allRequirements));
+  };
+  DecisionCrunchEngine.$metadata$ = {
+    kind: Kind_OBJECT,
+    simpleName: 'DecisionCrunchEngine',
+    interfaces: []
+  };
+  var DecisionCrunchEngine_instance = null;
+  function DecisionCrunchEngine_getInstance() {
+    if (DecisionCrunchEngine_instance === null) {
+      new DecisionCrunchEngine();
+    }
+    return DecisionCrunchEngine_instance;
+  }
+  var copyToArray = Kotlin.kotlin.collections.copyToArray;
   function main$lambda() {
-    console.log('Hello, Decisions!');
+    var requirements = listOf([new Requirement('c', 'Cost', 1.0), new Requirement('d', 'Distance to QT', 0.6)]);
+    var options = listOf([new Option('Century Skyline', mapOf([to('c', 0.5), to('d', 0.9)])), new Option('Somewhere Else A', mapOf([to('c', 0.7), to('d', 0.7)])), new Option('Somewhere Else B', mapOf([to('c', 1.0), to('d', 0.4)]))]);
+    console.log(copyToArray(toList(DecisionCrunchEngine_getInstance().crunch_n1qnm0$(requirements, options).pieChart)));
     return Unit;
   }
   function main(args) {
     $(main$lambda);
   }
+  function Decision(pieChart) {
+    this.pieChart_rze03y$_0 = pieChart;
+  }
+  Object.defineProperty(Decision.prototype, 'pieChart', {
+    get: function () {
+      return this.pieChart_rze03y$_0;
+    }
+  });
+  Decision.$metadata$ = {
+    kind: Kind_CLASS,
+    simpleName: 'Decision',
+    interfaces: []
+  };
+  function MutableDecision(pieChart) {
+    Decision.call(this, emptyMap());
+    this.pieChart_fwhxwc$_0 = pieChart;
+  }
+  Object.defineProperty(MutableDecision.prototype, 'pieChart', {
+    get: function () {
+      return this.pieChart_fwhxwc$_0;
+    },
+    set: function (pieChart) {
+      this.pieChart_fwhxwc$_0 = pieChart;
+    }
+  });
+  var toMap = Kotlin.kotlin.collections.toMap_abgq59$;
+  MutableDecision.prototype.immutableCopy = function () {
+    return new Decision(toMap(this.pieChart));
+  };
+  MutableDecision.$metadata$ = {
+    kind: Kind_CLASS,
+    simpleName: 'MutableDecision',
+    interfaces: [Decision]
+  };
+  var immutableCopy = defineInlineFunction('Decision Cruncher.DecisionCruncher.immutableCopy_5rvit3$', wrapFunction(function () {
+    var toMap = Kotlin.kotlin.collections.toMap_abgq59$;
+    return function ($receiver) {
+      return toMap($receiver);
+    };
+  }));
+  function DecisionCruncherState(allRequirements, allOptions, preCalculatedResult) {
+    if (preCalculatedResult === void 0)
+      preCalculatedResult = null;
+    this.allRequirements = allRequirements;
+    this.allOptions = allOptions;
+    this.result_mzytf0$_0 = lazy(DecisionCruncherState$result$lambda(preCalculatedResult, this));
+  }
+  Object.defineProperty(DecisionCruncherState.prototype, 'result', {
+    get: function () {
+      return this.result_mzytf0$_0.value;
+    }
+  });
+  function DecisionCruncherState$result$lambda(closure$preCalculatedResult, this$DecisionCruncherState) {
+    return function () {
+      return closure$preCalculatedResult != null ? closure$preCalculatedResult : DecisionCrunchEngine_getInstance().crunch_n1qnm0$(this$DecisionCruncherState.allRequirements, this$DecisionCruncherState.allOptions);
+    };
+  }
+  DecisionCruncherState.$metadata$ = {
+    kind: Kind_CLASS,
+    simpleName: 'DecisionCruncherState',
+    interfaces: []
+  };
+  function DecisionInput() {
+  }
+  DecisionInput.$metadata$ = {
+    kind: Kind_INTERFACE,
+    simpleName: 'DecisionInput',
+    interfaces: []
+  };
+  function Serializable() {
+  }
+  Serializable.$metadata$ = {
+    kind: Kind_INTERFACE,
+    simpleName: 'Serializable',
+    interfaces: []
+  };
+  function SerializableDecisionCruncherState(id, allOptions, allRequirements) {
+    this.i_smazkr$_0 = toBoxedChar(id);
+    this.o = allOptions;
+    this.r = allRequirements;
+  }
+  Object.defineProperty(SerializableDecisionCruncherState.prototype, 'i', {
+    get: function () {
+      return toBoxedChar(this.i_smazkr$_0);
+    }
+  });
+  SerializableDecisionCruncherState.$metadata$ = {
+    kind: Kind_CLASS,
+    simpleName: 'SerializableDecisionCruncherState',
+    interfaces: [Serializable]
+  };
+  function SerializableOption(id, name, requirementConformance) {
+    this.i_xuvh0z$_0 = toBoxedChar(id);
+    this.n = name;
+    this.c = requirementConformance;
+  }
+  Object.defineProperty(SerializableOption.prototype, 'i', {
+    get: function () {
+      return toBoxedChar(this.i_xuvh0z$_0);
+    }
+  });
+  SerializableOption.$metadata$ = {
+    kind: Kind_CLASS,
+    simpleName: 'SerializableOption',
+    interfaces: [Serializable]
+  };
+  function SerializableRequirement(id, name) {
+    this.i_1fuv9p$_0 = toBoxedChar(id);
+    this.n = name;
+  }
+  Object.defineProperty(SerializableRequirement.prototype, 'i', {
+    get: function () {
+      return toBoxedChar(this.i_1fuv9p$_0);
+    }
+  });
+  SerializableRequirement.$metadata$ = {
+    kind: Kind_CLASS,
+    simpleName: 'SerializableRequirement',
+    interfaces: [Serializable]
+  };
+  function Option(name, requirementConformance) {
+    this.name_qhnkfi$_0 = name;
+    this.requirementConformance = requirementConformance;
+  }
+  Object.defineProperty(Option.prototype, 'name', {
+    get: function () {
+      return this.name_qhnkfi$_0;
+    }
+  });
+  Option.$metadata$ = {
+    kind: Kind_CLASS,
+    simpleName: 'Option',
+    interfaces: [DecisionInput]
+  };
+  function Requirement(id, name, importance) {
+    if (id === void 0)
+      id = IdManager_getInstance().generateNewShortId();
+    this.id = id;
+    this.name_tyzx70$_0 = name;
+    this.importance = importance;
+  }
+  Object.defineProperty(Requirement.prototype, 'name', {
+    get: function () {
+      return this.name_tyzx70$_0;
+    }
+  });
+  Requirement.prototype.hashCode = function () {
+    return hashCode(this.id);
+  };
+  Requirement.prototype.equals = function (other) {
+    if (this === other)
+      return true;
+    if (!Kotlin.isType(other, Requirement))
+      return false;
+    if (!equals(this.id, other.id))
+      return false;
+    return true;
+  };
+  Requirement.$metadata$ = {
+    kind: Kind_CLASS,
+    simpleName: 'Requirement',
+    interfaces: [DecisionInput]
+  };
   var asList = defineInlineFunction('Decision Cruncher.jQueryInterface.asList_9ufosi$', wrapFunction(function () {
     var asList = Kotlin.kotlin.collections.asList_us0mfu$;
     return function ($receiver) {
@@ -127,27 +364,27 @@ this['Decision Cruncher'] = function (_, Kotlin) {
     kind: Kind_CLASS,
     interfaces: [Iterator]
   };
-  function iterator($receiver) {
+  function iterator_0($receiver) {
     if ($receiver.length === 0) {
       return Kotlin.arrayIterator([]);
     }
     return new iterator$ObjectLiteral($receiver);
   }
-  function forEach($receiver, iterator_0) {
+  function forEach($receiver, iterator) {
     var tmp$;
-    tmp$ = iterator($receiver);
+    tmp$ = iterator_0($receiver);
     while (tmp$.hasNext()) {
       var it = tmp$.next();
-      iterator_0(it);
+      iterator(it);
     }
   }
-  function forEachIndexed($receiver, iterator_0) {
+  function forEachIndexed($receiver, iterator) {
     var tmp$;
     var index = 0;
-    tmp$ = iterator($receiver);
+    tmp$ = iterator_0($receiver);
     while (tmp$.hasNext()) {
       var it = tmp$.next();
-      iterator_0(index, it);
+      iterator(index, it);
       index = index + 1 | 0;
     }
   }
@@ -430,6 +667,15 @@ this['Decision Cruncher'] = function (_, Kotlin) {
     }
     return runningValue.v;
   }
+  function reduceInto($receiver, startingValue, reducer) {
+    var tmp$;
+    tmp$ = $receiver.iterator();
+    while (tmp$.hasNext()) {
+      var element = tmp$.next();
+      reducer(startingValue, element);
+    }
+    return startingValue;
+  }
   var safeReduce = defineInlineFunction('Decision Cruncher.org.bh.tools.base.collections.extensions.safeReduce_lrrcxv$', wrapFunction(function () {
     var count = Kotlin.kotlin.collections.count_7wnvza$;
     var UnsupportedOperationException_init = Kotlin.kotlin.UnsupportedOperationException_init_pdl1vj$;
@@ -566,6 +812,43 @@ this['Decision Cruncher'] = function (_, Kotlin) {
       didSet = NullDSB();
     return new observing$ObjectLiteral(shouldSet, willSet, didSet, initialValue);
   }
+  var collectionSizeOrDefault = Kotlin.kotlin.collections.collectionSizeOrDefault_ba2ldo$;
+  var ArrayList_init = Kotlin.kotlin.collections.ArrayList_init_ww73n8$;
+  function JsMap(values, valueClass) {
+    this.valueClass_0 = valueClass;
+    var destination = ArrayList_init(collectionSizeOrDefault(values, 10));
+    var tmp$;
+    tmp$ = values.iterator();
+    while (tmp$.hasNext()) {
+      var item = tmp$.next();
+      destination.add_11rb$(to(toString(item.first), item.second));
+    }
+    this.internal_0 = json(copyToArray(destination).slice());
+  }
+  JsMap.prototype.toString = function () {
+    return this.internal_0.toString();
+  };
+  JsMap.prototype.get_11rb$ = function (key) {
+    var tmp$, tmp$_0;
+    tmp$ = this.internal_0[toString(key)];
+    if (tmp$ == null) {
+      return undefined;
+    }
+    var v = tmp$;
+    return (tmp$_0 = as_(v, this.valueClass_0)) != null ? tmp$_0 : undefined;
+  };
+  JsMap.prototype.set_y77fpw$ = function (key, value) {
+    this.internal_0[toString(key)] = value;
+  };
+  JsMap.$metadata$ = {
+    kind: Kind_CLASS,
+    simpleName: 'JsMap',
+    interfaces: []
+  };
+  function as_($receiver, targetClass) {
+    var tmp$;
+    return targetClass.isInstance_s8jyv4$($receiver) ? Kotlin.isType(tmp$ = $receiver, Any) ? tmp$ : throwCCE() : null;
+  }
   var toString_1 = defineInlineFunction('Decision Cruncher.org.bh.tools.base.jsShim.toString_798l30$', function ($receiver, base) {
     return $receiver.toString(base);
   });
@@ -581,20 +864,46 @@ this['Decision Cruncher'] = function (_, Kotlin) {
   var replace = defineInlineFunction('Decision Cruncher.org.bh.tools.base.jsShim.replace_he2ph6$', function ($receiver, regExp, replacer) {
     return $receiver.replace(regExp, replacer);
   });
+  function toBase($receiver, baseCharacters) {
+    var result = '';
+    var x = $receiver;
+    var b = baseCharacters.length;
+    do {
+      result = x.modulo(Kotlin.Long.fromInt(b)).toString() + result;
+      x = x.div(Kotlin.Long.fromInt(b));
+    }
+     while (x.compareTo_11rb$(Kotlin.Long.fromInt(0)) > 0);
+    return result;
+  }
+  var Math_0 = Math;
+  function fromBase($receiver, baseCharacters) {
+    var tmp$;
+    var result = Kotlin.Long.ZERO;
+    var position = $receiver.length;
+    tmp$ = iterator($receiver);
+    while (tmp$.hasNext()) {
+      var ch = unboxChar(tmp$.next());
+      var value = indexOf(baseCharacters, ch);
+      var tmp$_0 = result;
+      var $receiver_0 = baseCharacters.length;
+      var n = (position = position - 1 | 0, position);
+      result = tmp$_0.add(Kotlin.Long.fromNumber(value * Math_0.pow($receiver_0, n)));
+    }
+    return result;
+  }
   function isUpperCase($receiver) {
     return unboxChar(String.fromCharCode($receiver).toLowerCase().charCodeAt(0)) !== $receiver;
   }
   function isLowerCase($receiver) {
     return unboxChar(String.fromCharCode($receiver).toUpperCase().charCodeAt(0)) !== $receiver;
   }
-  var iterator_0 = Kotlin.kotlin.text.iterator_gw00vp$;
   function toAbbreviation($receiver, delimiter) {
     if (delimiter === void 0)
       delimiter = '';
     var ret = new StringBuilder();
     var shouldAdd = {v: false};
     var tmp$;
-    tmp$ = iterator_0($receiver);
+    tmp$ = iterator($receiver);
     while (tmp$.hasNext()) {
       var element = unboxChar(tmp$.next());
       var c = toBoxedChar(element);
@@ -634,8 +943,6 @@ this['Decision Cruncher'] = function (_, Kotlin) {
   function containsIgnoreCase($receiver, cs) {
     return contains($receiver.toString().toLowerCase(), cs.toString().toLowerCase());
   }
-  var ArrayList_init = Kotlin.kotlin.collections.ArrayList_init_ww73n8$;
-  var Math_0 = Math;
   var addAll = Kotlin.kotlin.collections.addAll_ipc267$;
   function differingCharacters($receiver, other) {
     if (equals($receiver, other)) {
@@ -663,7 +970,7 @@ this['Decision Cruncher'] = function (_, Kotlin) {
       var destination = ArrayList_init($receiver_0.length);
       var tmp$_0, tmp$_0_0;
       var index = 0;
-      tmp$_0 = iterator_0($receiver_0);
+      tmp$_0 = iterator($receiver_0);
       while (tmp$_0.hasNext()) {
         var item = unboxChar(tmp$_0.next());
         destination.add_11rb$(new DifferingCharacter((tmp$_0_0 = index, index = tmp$_0_0 + 1 | 0, tmp$_0_0) + offset | 0, unboxChar(toBoxedChar(item)), null));
@@ -678,7 +985,7 @@ this['Decision Cruncher'] = function (_, Kotlin) {
       var destination_0 = ArrayList_init($receiver_1.length);
       var tmp$_1, tmp$_0_1;
       var index_0 = 0;
-      tmp$_1 = iterator_0($receiver_1);
+      tmp$_1 = iterator($receiver_1);
       while (tmp$_1.hasNext()) {
         var item_0 = unboxChar(tmp$_1.next());
         destination_0.add_11rb$(new DifferingCharacter((tmp$_0_1 = index_0, index_0 = tmp$_0_1 + 1 | 0, tmp$_0_1) + offset_0 | 0, null, unboxChar(toBoxedChar(item_0))));
@@ -946,6 +1253,33 @@ this['Decision Cruncher'] = function (_, Kotlin) {
         throw _;
     }
   }
+  function IdManager() {
+    IdManager_instance = this;
+    this.lastShortIdBasis_0 = Kotlin.Long.ZERO;
+  }
+  IdManager.prototype.generateNewShortId = function () {
+    var currentShortIdBasis = this.lastShortIdBasis_0;
+    this.lastShortIdBasis_0 = this.lastShortIdBasis_0.add(Kotlin.Long.fromInt(1));
+    return toBase(currentShortIdBasis, shortIds_v1);
+  };
+  IdManager.prototype.registerEncounteredShortId_61zpoe$ = function (encounteredShortId) {
+    var a = this.lastShortIdBasis_0;
+    var b = fromBase(encounteredShortId, shortIds_v1);
+    this.lastShortIdBasis_0 = a.compareTo_11rb$(b) >= 0 ? a : b;
+  };
+  IdManager.$metadata$ = {
+    kind: Kind_OBJECT,
+    simpleName: 'IdManager',
+    interfaces: []
+  };
+  var IdManager_instance = null;
+  function IdManager_getInstance() {
+    if (IdManager_instance === null) {
+      new IdManager();
+    }
+    return IdManager_instance;
+  }
+  var shortIds_v1;
   var alsoLog = defineInlineFunction('Decision Cruncher.org.bh.tools.io.logging.alsoLog_vxumlc$', wrapFunction(function () {
     var Unit = Kotlin.kotlin.Unit;
     var getCallableRef = Kotlin.getCallableRef;
@@ -1128,7 +1462,7 @@ this['Decision Cruncher'] = function (_, Kotlin) {
     this.empty = new HttpRequest$RequestParameters(emptyList());
   }
   HttpRequest$RequestParameters$Companion.prototype.invoke_bgp2as$ = function (allParameters) {
-    return new HttpRequest$RequestParameters(toList(allParameters));
+    return new HttpRequest$RequestParameters(toList_0(allParameters));
   };
   HttpRequest$RequestParameters$Companion.$metadata$ = {
     kind: Kind_OBJECT,
@@ -2014,7 +2348,6 @@ this['Decision Cruncher'] = function (_, Kotlin) {
     simpleName: 'JSTernaryCheckboxTreeController',
     interfaces: [TernaryCheckboxTree]
   };
-  var collectionSizeOrDefault = Kotlin.kotlin.collections.collectionSizeOrDefault_ba2ldo$;
   function JSTernaryCheckboxTreeController_init(rootCheckbox, children, $this) {
     $this = $this || Object.create(JSTernaryCheckboxTreeController.prototype);
     var tmp$ = new JSCheckboxController(rootCheckbox);
@@ -2030,11 +2363,27 @@ this['Decision Cruncher'] = function (_, Kotlin) {
   }
   var package$DecisionCruncher = _.DecisionCruncher || (_.DecisionCruncher = {});
   package$DecisionCruncher.AppViewController = AppViewController;
+  Object.defineProperty(package$DecisionCruncher, 'DecisionCrunchEngine', {
+    get: DecisionCrunchEngine_getInstance
+  });
   package$DecisionCruncher.main_kand9s$ = main;
+  package$DecisionCruncher.Decision = Decision;
+  $$importsForInline$$['Decision Cruncher'] = _;
+  package$DecisionCruncher.MutableDecision = MutableDecision;
+  package$DecisionCruncher.immutableCopy_5rvit3$ = immutableCopy;
+  var package$Structures = package$DecisionCruncher.Structures || (package$DecisionCruncher.Structures = {});
+  package$Structures.DecisionCruncherState = DecisionCruncherState;
+  package$DecisionCruncher.DecisionInput = DecisionInput;
+  package$DecisionCruncher.Serializable = Serializable;
+  package$DecisionCruncher.s = SerializableDecisionCruncherState;
+  package$DecisionCruncher.SerializableOption = SerializableOption;
+  package$DecisionCruncher.SerializableRequirement = SerializableRequirement;
+  package$DecisionCruncher.Option = Option;
+  package$DecisionCruncher.Requirement = Requirement;
   var package$jQueryInterface = _.jQueryInterface || (_.jQueryInterface = {});
   package$jQueryInterface.asList_9ufosi$ = asList;
   package$jQueryInterface.mapNotNull_fo801r$ = mapNotNull;
-  package$jQueryInterface.iterator_9ufosi$ = iterator;
+  package$jQueryInterface.iterator_9ufosi$ = iterator_0;
   package$jQueryInterface.forEach_f8zjg0$ = forEach;
   package$jQueryInterface.forEachIndexed_53xvis$ = forEachIndexed;
   var package$org = _.org || (_.org = {});
@@ -2045,7 +2394,6 @@ this['Decision Cruncher'] = function (_, Kotlin) {
   package$util.toBooleanOrNull_s8jyvk$ = toBooleanOrNull;
   package$jQueryInterface.booleanAttr_pl09c0$ = booleanAttr;
   package$jQueryInterface.booleanAttr_86h6l4$ = booleanAttr_0;
-  $$importsForInline$$['Decision Cruncher'] = _;
   package$jQueryInterface.disabled_9ufosi$ = disabled;
   package$jQueryInterface.disabled_5laha2$ = disabled_0;
   package$jQueryInterface.checked_9ufosi$ = checked;
@@ -2086,6 +2434,7 @@ this['Decision Cruncher'] = function (_, Kotlin) {
   package$extensions.firstOrNullComparingTriads_csic9r$ = firstOrNullComparingTriads;
   package$extensions.firstOrNullComparingPairs_cf0iqu$ = firstOrNullComparingPairs;
   package$extensions.reduceTo_db6zb0$ = reduceTo;
+  package$extensions.reduceInto_8nclxh$ = reduceInto;
   package$extensions.safeReduce_lrrcxv$ = safeReduce;
   package$extensions.safeReduce_w5eg7r$ = safeReduce_0;
   package$extensions.toString_j63yia$ = toString_0;
@@ -2098,11 +2447,16 @@ this['Decision Cruncher'] = function (_, Kotlin) {
   package$func.NullDSB_287e2$ = NullDSB;
   package$func.observing_bjs5ud$ = observing;
   var package$jsShim = package$base.jsShim || (package$base.jsShim = {});
+  package$jsShim.JsMap = JsMap;
+  package$jsShim.asOrNull = as_;
   package$jsShim.toString_798l30$ = toString_1;
   package$jsShim.toString_di2vk2$ = toString_2;
   package$jsShim.toString_dqglrj$ = toString_3;
   package$jsShim.toString_if0zpk$ = toString_4;
   package$jsShim.replace_he2ph6$ = replace;
+  var package$math = package$base.math || (package$base.math = {});
+  package$math.toBase_z7h088$ = toBase;
+  package$math.fromBase_rjktp$ = fromBase;
   var package$strings = package$base.strings || (package$base.strings = {});
   package$strings.isUpperCase_myv2d0$ = isUpperCase;
   package$strings.isLowerCase_myv2d0$ = isLowerCase;
@@ -2143,6 +2497,9 @@ this['Decision Cruncher'] = function (_, Kotlin) {
   package$struct.invoke_yniobj$ = invoke_2;
   package$util.deepCopy_eoe559$ = deepCopy;
   package$util.safeTry_klfg04$ = safeTry;
+  Object.defineProperty(package$util, 'IdManager', {
+    get: IdManager_getInstance
+  });
   var package$io = package$tools.io || (package$tools.io = {});
   var package$logging = package$io.logging || (package$io.logging = {});
   package$logging.consoleLogString_61zpoe$ = consoleLogString;
@@ -2248,6 +2605,7 @@ this['Decision Cruncher'] = function (_, Kotlin) {
   Object.defineProperty(CssHtmlAttributeWithValue.prototype, 'cssSelectorString', Object.getOwnPropertyDescriptor(CssHtmlAttribute.prototype, 'cssSelectorString'));
   DataAttribute.prototype.cssSelectorString_8ij0n9$ = CssHtmlAttributeWithValue.prototype.cssSelectorString_8ij0n9$;
   Object.defineProperty(DataAttribute.prototype, 'cssSelectorString', Object.getOwnPropertyDescriptor(CssHtmlAttributeWithValue.prototype, 'cssSelectorString'));
+  shortIds_v1 = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789_#';
   main([]);
   Kotlin.defineModule('Decision Cruncher', _);
   return _;

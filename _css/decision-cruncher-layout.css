@@ -1,0 +1,238 @@
+/**
+ * Layout for Decision Cruncher
+ *
+ * @since 2018-03-09
+ * @author Ben Leggiero of Blue Husky Studios
+ *
+ * @see https://BlueHuskyStudios.GitHub.IO/Decision-Cruncher
+ */
+
+
+.dc body>header h1 {
+    border: none;
+    margin: 0;
+    padding: 0 1ex;
+    flex-grow: 2;
+}
+
+.dc html,
+html.dc {
+    min-height: 100vh;
+}
+.dc body {
+    min-height: 80vh;
+}
+.dc main {
+    height: 100%
+}
+
+.dc header {
+    padding: 4pt 8pt;
+    min-height: auto;
+}
+
+.dc section {
+    margin: 2em 0;
+}
+
+.dc dialog {
+    box-shadow: 0 2em 5em rgba(0, 0, 0, 0.1), 0 1em 2em rgba(0, 0, 0, 0.2), 0 1pt 4pt rgba(0, 0, 0, 0.3);
+    border: none;
+    border-radius: 2pt;
+    position: fixed;
+    top: 10%;
+    left: 0;
+    right: 0;
+    height: -webkit-fit-content;
+    height: -moz-fit-content;
+    height: -ms-fit-content;
+    height: fit-content;
+    max-height: -webkit-fit-content;
+    max-height: -moz-fit-content;
+    max-height: -ms-fit-content;
+    max-height: fit-content;
+    margin: auto !important;
+    width: -webkit-fit-content;
+    width: -moz-fit-content;
+    width: -ms-fit-content;
+    width: fit-content;
+    z-index: 10;
+
+    transition-property: opacity;
+    transition-duration: 1s;
+
+    opacity: 0;
+
+    } @media (max-width: 479px) { .dc dialog {
+        width: 95vw;
+        width: calc(100vw - 1em);
+    }
+}
+    .dc dialog.severe {
+        box-shadow: 0 2em 5em rgba(0, 0, 0, .8), 0 0 0 .5em #FF1744, 0 1em 2em rgba(0, 0, 0, .5), 0 1pt 4pt rgba(0, 0, 0, .2);
+    }
+
+    .dc dialog[open] {
+        opacity: 1;
+    }
+
+.dc body .warning-message {
+    padding: 1em;
+}
+.dc main .warning-message {
+    margin: 1em 0;
+
+    } @media screen and (max-width: 479px) { .dc main .warning-message {
+        width: 100vw;
+    }
+}
+
+.dc button {
+    border-radius: 2pt;
+}
+    .dc dialog button {
+        } @media (min-width: 480px) { .dc dialog button {
+            padding: 3px 1em;
+            min-width: 64px;
+        }
+    }
+
+.dc button,
+.dc .button {
+    cursor: pointer;
+    transition-duration: 0.5s;
+    transition-property: box-shadow;
+}
+
+.dc button:not(:disabled):hover,
+.dc button:not(:disabled):focus,
+.dc .button:hover,
+.dc .button:focus {
+    box-shadow: 0 2pt 10pt rgba(0, 0, 0, 0.2), 0 2pt 5pt rgba(0, 0, 0, 0.2);
+}
+
+.dc button:active,
+.dc .button:active {
+    box-shadow: inset 0 2pt 10pt rgba(0, 0, 0, 0.2), inset 0 2pt 5pt rgba(0, 0, 0, 0.2);
+}
+
+.dc td.vert-bottom {
+    vertical-align: bottom;
+}
+
+.dc.material input[type=text][placeholder]::before {
+    box-shadow: 0 0 0 10px magenta;
+    content: "Text";
+    position: absolute;
+    z-index: 1;
+    top: -1em;
+}
+
+.dc.material input[type=text][placeholder] {
+    position: relative;
+    z-index: 0;
+}
+
+.dc .fork:link,
+.dc .fork:visited,
+.dc :link .fa,
+.dc :visited .fa,
+.dc :link:hover .fa,
+.dc :visited:hover .fa,
+.dc :link:focus .fa,
+.dc :visited:focus .fa {
+    text-decoration: none !important;
+}
+
+
+.dc :link b.fork-cta {
+    text-overflow: clip;
+    white-space: nowrap;
+    overflow: hidden;
+    transition-property: max-width;
+    max-width: 50vw;
+}
+.dc :link:not(:hover):not(:focus) b.fork-cta {
+    max-width: 0;
+}
+
+
+.dc aside p {
+    margin: 0 0.5ex;
+}
+
+.dc footer aside {
+    line-height: 1.5;
+}
+
+.dc .button-list button:not(:last-child) {
+    margin-right: 1rem;
+}
+
+.dc .button-list:last-child {
+    margin-top: 1ex;
+}
+
+.dc input:read-only {
+    opacity: 0.5;
+}
+
+
+
+/* MARK: - Inputs - Requirements */
+
+.dc .list-card {
+    position: relative;
+    padding-bottom: 24pt;
+}
+
+.dc .input-list {
+    list-style-type: none;
+}
+    .dc .input-list li {
+        margin: 0;
+    }
+
+.dc #inputs .heading {
+    text-align: center;
+    margin: 0 6pt;
+}
+
+.dc #inputs .name {
+    flex-grow: 1;
+    min-width: 1in;
+    width: 100%;
+    flex-basis: 1in;
+}
+    .dc #requirements .importance {
+        max-width: calc(50vw - 3rem);
+    }
+
+.dc #inputs .importance {
+    width: 1in;
+    flex-grow: 0;
+}
+    .dc #inputs .importance.heading {
+        align-self: flex-end;
+    }
+
+.dc .card [class^="FAB-"],
+.dc .card [class*=" FAB-"] {
+    position: absolute;
+}
+.dc .card .FAB-pin-bottom { bottom: -1em; }
+.dc .card .FAB-pin-right  { right:  -1em; }
+.dc .card .FAB-pin-top    { top:    -1em; }
+.dc .card .FAB-pin-left   { left:   -1em; }
+
+.dc .list-card {
+    margin-left: 2ex;
+    margin-right: 2ex;
+}
+.dc #inputs>* {
+    flex-grow: 1;
+    flex-basis: 2in;
+}
+.dc .card h3 input[type="text"] {
+    width: 100%;
+}

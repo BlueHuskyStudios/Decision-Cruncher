@@ -1,12 +1,223 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!-- The UI for crunching decisions
+  *
+  * @dependency jQuery 3+: https://Code.jQuery.com/jquery-3.1.0.slim.min.js
+  * @dependency FontAwesome: https://use.fontawesome.com/5167d0f8d0.js
+  *
+  * @since 2018-03-09
+  * @author Ben Leggiero of Blue Husky Studios
+  *
+  * @see https://github.com/BlueHuskyStudios/Decision-Cruncher
+  * @see https://BlueHuskyStudios.GitHub.IO/Decision-Cruncher
+  -->
 <!DOCTYPE html
         PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xml:lang="en"
+      lang="en"
+      class="dc husktype material brightness-dark">
 <head>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
+    <!--suppress RequiredAttributes --> <meta charset="utf-8" />
+    <meta property="og:locale" content="en_US" />
     <title>Decision Cruncher</title>
-</head>
-<body>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no" /> <!-- Phones should not zoom out -->
 
+    <link rel="apple-touch-icon" type="image/png" href="https://BlueHuskyStudios.github.io/Decision-Cruncher/_img/Icon%201.0.0%20(1024p).png" />
+
+    <meta name="description"                           content="Helps you crunch a bunch of options to make a decision" property="og:description"/>
+    <meta name="keywords"                              content="Decision Cruncher,Decisions,Thinking"/>
+    <meta property="og:title"                          content="Decision Crunching" />
+    <meta property="twitter:title"                     content="Decision Crunching" />
+    <meta name="twitter:description"                   content="Helps you crunch a bunch of options to make a decision" />
+    <meta property="og:site_name"                      content="Blue Husky Studios" />
+    <meta property="twitter:site"                      content="Blue Husky Studios" />
+    <meta name="twitter:creator"                       content="@BluHuskyStudios" /><!-- Tell twitter that this was made by Blue Husky Studios -->
+    <meta property="og:type"                           content="article" />
+    <meta name="twitter:card"                          content="summary_large_image" /><!-- Tell twitter that this link can be presented as a large image with a summary -->
+    <meta name="msapplication-TileColor"               content="#FF6E40" /><!-- When pinned as a tile for Windows 8, this is the color -->
+    <meta name="theme-color"                           content="#FF6E40"/><!-- Color in Chrome address bar -->
+    <meta name="apple-mobile-web-app-status-bar-style" content="#FF6E40" /><!-- Color in Safari status bar -->
+    <meta name="msapplication-TileImage"               content="https://BlueHuskyStudios.github.io/Decision-Cruncher/_img/Icon%201.0.0%20(1024p).png" /><!-- When pinned as a tile for Windows 8+, this is the image -->
+    <meta name="twitter:card"                          content="summary_large_image" />
+    <meta property="og:image"                          content="https://BlueHuskyStudios.github.io/Decision-Cruncher/_img/Logo%201.0.0%20(480p).png" /><!-- Image for sharing on social networks -->
+    <meta property="twitter:image"                     content="https://BlueHuskyStudios.github.io/Decision-Cruncher/_img/Logo%201.0.0%20(480p).png" />
+    <meta name="twitter:image:src"                     content="https://BlueHuskyStudios.github.io/Decision-Cruncher/_img/Logo%201.0.0%20(480p).png" />
+
+
+
+    <!-- CSS reset to help ensure cross-browser reliability; frameworks for layout. flexbox, typography, printing; material design accents -->
+    <link rel='stylesheet' href="https://shared.bhstudios.org/_incl/css-masher.php?ids=0,11,16,18-21"/>
+    <link rel="stylesheet" href="https://shared.BHStudios.org/_css/visual_Clean_Amber.php" id="bhStudiosStyle"/> <!-- CSS general LaF -->
+    <link rel="stylesheet" href="./_css/decision-cruncher-layout.css" id="decisionCrunchLayoutStyle"/>           <!-- CSS for layout -->
+    <link rel="stylesheet" href="./_css/decision-cruncher-colors.css" id="decisionCrunchColorsStyle"/>           <!-- CSS for visuals -->
+    <link rel="stylesheet" href="./_css/decision-cruncher-typography.css" id="decisionCrunchTypeStyle"/>         <!-- Typographical styles -->
+    <script src="https://Code.jQuery.com/jquery-3.3.1.slim.min.js">/* jQuery 3.3.1 */</script>
+    <script src="https://use.fontawesome.com/5167d0f8d0.js">/* FontAwesome */</script>
+
+    <script src="./_js/production/Decision Cruncher/lib/kotlin.js">/* Kotlin/JS */</script>
+    <script src="./_js/production/Decision Cruncher/Decision Cruncher.js">/* this Decision Cruncher web app */</script>
+</head>
+
+
+
+<body>
+<header class="flex-row flex-horiz-space-between flex-vert-stretch   shadow-fullwidth z4">
+    <h1 class="brand title">Decision Cruncher</h1>
+    <aside class="flex-row flex-vert-stretch">
+        <a href="https://github.com/BlueHuskyStudios/Decision-Cruncher" class="fork flex-row flex-vert-center flex-nowrap" tabindex="1">
+            <b class="fork-cta">Fork me on GitHub!&emsp;</b> <i class="fa fa-github fa-2x"></i>
+        </a>
+    </aside>
+</header>
+
+
+<noscript>
+    <dialog class="big severe hero" open>
+        This page requires JavaScript to work. &#x1F640;
+    </dialog>
+</noscript>
+
+
+
+<main>
+
+    <h2 class="text-center">Make tough decisions easier.</h2>
+
+    <section id="inputs" class="flex-row flex-horiz-space-around flex-wrap   cards">
+        <section id="requirements" class="flex-column flex-wrap flex-horiz-stretch   card list-card   shadow z1">
+            <h3>Requirements</h3>
+
+            <aside class="flex-row flex-horiz-stretch">
+                <span class="name heading">Name</span>
+                <span class="importance heading">Importance</span>
+            </aside>
+            <ul id="requirements-list" class="input-list">
+                <li class="requirement   list-card-item   flex-row flex-horiz-stretch">
+                    <input type="text" class="name" value="Requirement A" />
+                    <input type="range" min="0" max="1" step="0.0001" class="importance slider"/>
+                </li>
+                <li class="requirement   list-card-item   flex-row flex-horiz-stretch">
+                    <input type="text" class="name" value="Requirement B" />
+                    <input type="range" min="0" max="1" step="0.0001" class="importance slider"/>
+                </li>
+                <li class="requirement   list-card-item   flex-row flex-horiz-stretch">
+                    <input type="text" class="name" value="Requirement C" />
+                    <input type="range" min="0" max="1" step="0.0001" class="importance slider"/>
+                </li>
+            </ul>
+
+            <button class="FAB FAB-mini FAB-pin-right FAB-pin-bottom shadow z6">+</button>
+        </section>
+
+        <section id="option-1" class="flex-column flex-wrap flex-horiz-stretch   card list-card   shadow z1">
+            <h3><input type="text" value="Option A"/></h3>
+
+            <ul class="options-list input-list">
+                <li class="option-requirement   list-card-item">
+                    <label for="req-1">Requirement A</label>: <input type="range" min="0" max="1" step="0.0001" id="req-1" class="fitness slider"/>
+                </li>
+                <li class="option-requirement   list-card-item">
+                    <label for="req-1">Requirement B</label>: <input type="range" min="0" max="1" step="0.0001" id="req-1" class="fitness slider"/>
+                </li>
+                <li class="option-requirement   list-card-item">
+                    <label for="req-1">Requirement C</label>: <input type="range" min="0" max="1" step="0.0001" id="req-1" class="fitness slider"/>
+                </li>
+            </ul>
+        </section>
+
+        <section id="option-2" class="flex-column flex-wrap flex-horiz-stretch   card list-card   shadow z1">
+            <h3><input type="text" value="Option B"/></h3>
+
+            <ul class="options-list input-list">
+                <li class="option-requirement   list-card-item">
+                    <label for="req-1">Requirement A</label>: <input type="range" min="0" max="1" step="0.0001" id="req-1" class="fitness slider"/>
+                </li>
+                <li class="option-requirement   list-card-item">
+                    <label for="req-1">Requirement B</label>: <input type="range" min="0" max="1" step="0.0001" id="req-1" class="fitness slider"/>
+                </li>
+                <li class="option-requirement   list-card-item">
+                    <label for="req-1">Requirement C</label>: <input type="range" min="0" max="1" step="0.0001" id="req-1" class="fitness slider"/>
+                </li>
+            </ul>
+        </section>
+
+        <section id="option-3" class="flex-column flex-wrap flex-horiz-stretch   card list-card   shadow z1">
+            <h3><input type="text" value="Option C"/></h3>
+
+            <ul class="options-list input-list">
+                <li class="option-requirement   list-card-item">
+                    <label for="req-1">Requirement A</label>: <input type="range" min="0" max="1" step="0.0001" id="req-1" class="fitness slider"/>
+                </li>
+                <li class="option-requirement   list-card-item">
+                    <label for="req-1">Requirement B</label>: <input type="range" min="0" max="1" step="0.0001" id="req-1" class="fitness slider"/>
+                </li>
+                <li class="option-requirement   list-card-item">
+                    <label for="req-1">Requirement C</label>: <input type="range" min="0" max="1" step="0.0001" id="req-1" class="fitness slider"/>
+                </li>
+            </ul>
+        </section>
+
+        <section id="option-1" class="flex-column flex-wrap flex-horiz-stretch   card list-card   shadow z1">
+            <h3><input type="text" value="Option D"/></h3>
+
+            <ul class="options-list input-list">
+                <li class="option-requirement   list-card-item">
+                    <label for="req-1">Requirement A</label>: <input type="range" min="0" max="1" step="0.0001" id="req-1" class="fitness slider"/>
+                </li>
+                <li class="option-requirement   list-card-item">
+                    <label for="req-1">Requirement B</label>: <input type="range" min="0" max="1" step="0.0001" id="req-1" class="fitness slider"/>
+                </li>
+                <li class="option-requirement   list-card-item">
+                    <label for="req-1">Requirement C</label>: <input type="range" min="0" max="1" step="0.0001" id="req-1" class="fitness slider"/>
+                </li>
+            </ul>
+
+            <button class="FAB FAB-mini FAB-pin-right FAB-pin-bottom shadow z6">+</button>
+        </section>
+    </section>
+
+    <hr/>
+
+    <section id="results">
+        <h3>Results</h3>
+
+
+    </section>
+</main>
+
+
+
+<footer class="flex-column flex-vert-bottom flex-horiz-center   text-uppercase text-center">
+    <aside class="text-normal">
+        Like this project and want to keep it rolling?
+        Support us monthly on <a href="https://www.patreon.com/BlueHuskyStudios" target="_blank">Patreon</a>,
+        or just once via the lead developer's <a href="https://paypal.me/BenLeggiero" target="_blank">PayPal</a>.
+    </aside>
+
+    <hr/>
+
+    <aside>
+        &copy; <a href="https://BHStudios.org" target="_blank">Blue Husky Studios</a> 2018, <a href="https://bit.ly/BH-1-PS">BH-1-PS</a>
+        <span class="hide-small hide-medium">&ensp;&mdash;&ensp;</span><br class="hide-large"/>
+        <a href="https://github.com/BlueHuskyStudios/Decision-Cruncher/releases/tag/0.0.0" target="_blank">Version 0.0.0</a>
+        <span>&ensp;&mdash;&ensp;</span>
+        <a href="https://github.com/BlueHuskyStudios/Decision-Cruncher/issues/new" target="_blank"><i class="fa fa-bug"></i> Report a Bug</a>
+    </aside>
+</footer>
+
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-84374713-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
 </body>
 </html>
