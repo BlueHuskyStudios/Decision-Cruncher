@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html
+        PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+    <title>Curve Example</title>
+    <style type="text/css">
+        canvas {
+            height: 50vmin;
+            width: 50vmin;
+            border: double #607D8B;
+            transform: rotateX(180deg);
+        }
+        body {
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+<figure>
+    <canvas id="canvas" height="1024" width="1024">You need a more modern browser</canvas>
+    <figcaption>
+        <h2>Bezier approximation</h2>
+        <p>An approximation of the curve described on <a href="https://math.stackexchange.com/q/2699582/317419">Math.StackExchange</a></p>
+        <div><label><i>m</i><input type="range" id="m" min="0" max="1" step="0.001" value="0.1"/></label></div>
+        <div><label><i>n</i><input type="range" id="n" min="0" max="1" step="0.001" value="0.5"/></label></div>
+    </figcaption>
+</figure>
+
+
+<script>
+canvas = {
+    "element": document.getElementById("canvas")
+}
+
+inputs = {
+    "m": {
+        "element": document.getElementById("m")
+    },
+    "n": {
+        "element": document.getElementById("n")
+    }
+}
+
+function draw() {
+    m = inputs.m.value
+    n = inputs.n.value
+    context = canvas.element.getContext('2d')
+
+    context.clearRect(0, 0, canvas.drawingWidth, canvas.drawingHeight)
+    context.scale(canvas.drawingWidth, canvas.drawingHeight)
+    //context.scale(20, 20)
+
+    context.beginPath()
+    context.moveTo(0, m)
+    context.bezierCurveTo(
+        (n / 2), m,
+        (n / 2), 1,
+        (n), 1
+    )
+    context.bezierCurveTo(
+      1 - ((1 - n) / 2), 1,
+      1 - ((1 - n) / 2), m,
+      1, m
+    )
+    context.lineWidth = 2 / canvas.actualHeight
+    context.stroke()
+    context.resetTransform();
+}
+
+
+function saveInputValuesFromPage() {
+    inputs.m.value = +inputs.m.element.value
+    inputs.n.value = +inputs.n.element.value
+}
+
+
+function inputsDidUpdate() {
+    saveInputValuesFromPage()
+    draw()
+}
+
+
+function saveCanvasSizeFromPage() {
+    canvas.actualWidth = canvas.element.offsetWidth
+    canvas.actualHeight = canvas.element.offsetHeight
+    canvas.drawingWidth = canvas.element.width
+    canvas.drawingHeight = canvas.element.height
+}
+
+
+function canvasSizeDidChange() {
+    saveCanvasSizeFromPage()
+    draw()
+}
+
+
+function startListeningForUpdates() {
+    for (inputIndex in inputs) {
+        inputs[inputIndex].element.addEventListener("input", inputsDidUpdate)
+    }
+
+    window.onresize = canvasSizeDidChange
+
+    saveInputValuesFromPage()
+    saveCanvasSizeFromPage()
+}
+
+startListeningForUpdates()
+draw()
+</script>
+</body>
+</html>
