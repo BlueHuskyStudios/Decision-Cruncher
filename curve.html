@@ -15,21 +15,50 @@
         body {
             text-align: center;
         }
+
+        figcaption [id$="-legend"] {
+            padding: 0 1em;
+            border-top-width: 2px;
+        }
+            figcaption #bezier-legend {
+                color: #90A4AE;
+                border-top-style: solid;
+            }
+            figcaption #function-legend {
+                color: #D81B60;
+                border-top-style: dotted;
+            }
     </style>
 </head>
 <body>
-<figure>
-    <canvas id="canvas" height="1024" width="1024">You need a more modern browser</canvas>
-    <figcaption>
-        <h2>Bezier approximation</h2>
-        <p>An approximation of the curve described on <a href="https://math.stackexchange.com/q/2699582/317419">Math.StackExchange</a></p>
-        <div><label><i>m</i><input type="range" id="m" min="0" max="1" step="0.001" value="0.1"/></label></div>
-        <div><label><i>n</i><input type="range" id="n" min="0" max="1" step="0.001" value="0.5"/></label></div>
-    </figcaption>
-</figure>
+<main>
+    <figure>
+        <canvas id="canvas" height="1024" width="1024">You need a more modern browser</canvas>
+        <figcaption>
+            <h2>Bezier approximation &amp; the points of the actual function</h2>
+            <aside><span id="bezier-legend">Approximation</span>&emsp;<span id="function-legend">Function</span></aside>
+            <p>An approximation of the curve described on
+                <a href="https://math.stackexchange.com/q/2699582/317419">a question</a> and
+                <a href="https://math.stackexchange.com/a/2700489/317419">its answer</a> on Math.StackExchange</p>
+            <div><label><i>m</i><input type="range" id="m" min="0" max="1" step="0.001" value="0.1"/></label></div>
+            <div><label><i>n</i><input type="range" id="n" min="0" max="1" step="0.001" value="0.5"/></label></div>
+            <hr/>
+            <h2>Code representation of actual function</h2>
+            Here's the code that produces the red dots:
+            <pre>
+f(x, m, n) = k(m, e ** -(f_1(x, m, n) ** 2))
+
+f_1(x, m, n) = ((x - n)/(((1 - (2 * n)) * x) + n))
+
+k(m, x) = ((1 - e) * m * x) / (((1 - (e * m)) * x) + (m - 1))
+            </pre>
+        </figcaption>
+    </figure>
+</main>
 
 
-<script>
+<!--suppress CheckValidXmlInScriptTagBody -->
+<script type="application/javascript">
 canvas = {
     "element": document.getElementById("canvas")
 }
@@ -43,6 +72,20 @@ inputs = {
     }
 }
 
+
+function f(x, m, n) {
+    function temp_1 (x, m, n) {
+        return ((x - n)/(((1 - (2 * n)) * x) + n))
+    }
+    return k(m, Math.E ** -(temp_1(x, m, n) ** 2))
+}
+
+
+function k(m, x) {
+    return ((1 - Math.E) * m * x) / (((1 - (Math.E * m)) * x) + (m - 1))
+}
+
+
 function draw() {
     m = inputs.m.value
     n = inputs.n.value
@@ -50,7 +93,7 @@ function draw() {
 
     context.clearRect(0, 0, canvas.drawingWidth, canvas.drawingHeight)
     context.scale(canvas.drawingWidth, canvas.drawingHeight)
-    //context.scale(20, 20)
+
 
     context.beginPath()
     context.moveTo(0, m)
@@ -64,9 +107,19 @@ function draw() {
       1 - ((1 - n) / 2), m,
       1, m
     )
-    context.lineWidth = 2 / canvas.actualHeight
+    context.lineWidth = 4 / canvas.drawingWidth
+    context.strokeStyle = '#90A4AE'
     context.stroke()
-    context.resetTransform();
+
+
+    context.fillStyle = '#D81B60'
+    step = 4 / canvas.drawingWidth
+    for (x = 0; x < 1; x += step) {
+        y = f(x, m, n)
+        context.fillRect(x, y, step, step)
+    }
+
+    context.resetTransform()
 }
 
 
