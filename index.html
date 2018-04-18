@@ -37,7 +37,7 @@
     <meta property="og:type"                           content="article" />
     <meta name="twitter:card"                          content="summary_large_image" /><!-- Tell twitter that this link can be presented as a large image with a summary -->
     <meta name="msapplication-TileColor"               content="#FF6E40" /><!-- When pinned as a tile for Windows 8, this is the color -->
-    <meta name="theme-color"                           content="#FF6E40"/><!-- Color in Chrome address bar -->
+    <meta name="theme-color"                           content="#FF6E40" /><!-- Color in Chrome address bar -->
     <meta name="apple-mobile-web-app-status-bar-style" content="#FF6E40" /><!-- Color in Safari status bar -->
     <meta name="msapplication-TileImage"               content="https://BlueHuskyStudios.github.io/Decision-Cruncher/_img/Icon%201.0.0%20(1024p).png" /><!-- When pinned as a tile for Windows 8+, this is the image -->
     <meta name="twitter:card"                          content="summary_large_image" />
@@ -49,7 +49,7 @@
 
     <!-- CSS reset to help ensure cross-browser reliability; frameworks for layout. flexbox, typography, printing; material design accents -->
     <link rel='stylesheet' href="https://shared.bhstudios.org/_incl/css-masher.php?ids=0,11,16,18-21"/>
-    <link rel="stylesheet" href="https://shared.BHStudios.org/_css/visual_Clean_Amber.php" id="bhStudiosStyle"/> <!-- CSS general LaF -->
+    <link rel="stylesheet" href="https://BlueHuskyStudios.github.io/stylesheets/assets/v2/neon/neon-fire.css" id="bhStudiosStyle"/> <!-- CSS general LaF -->
     <link rel="stylesheet" href="./_css/decision-cruncher-layout.css" id="decisionCrunchLayoutStyle"/>           <!-- CSS for layout -->
     <link rel="stylesheet" href="./_css/decision-cruncher-colors.css" id="decisionCrunchColorsStyle"/>           <!-- CSS for visuals -->
     <link rel="stylesheet" href="./_css/decision-cruncher-typography.css" id="decisionCrunchTypeStyle"/>         <!-- Typographical styles -->
@@ -63,7 +63,7 @@
 
 
 <body>
-<header class="flex-row flex-horiz-space-between flex-vert-stretch   shadow-fullwidth z4">
+<header class="app-bar">
     <h1 class="brand title">Decision Cruncher</h1>
     <aside class="flex-row flex-vert-stretch">
         <a href="https://github.com/BlueHuskyStudios/Decision-Cruncher" class="fork flex-row flex-vert-center flex-nowrap" tabindex="1">
@@ -89,10 +89,11 @@
         <section id="requirements" class="flex-column flex-wrap flex-horiz-stretch   card list-card   shadow z1">
             <h3>Requirements</h3>
 
-            <aside class="flex-row flex-horiz-stretch">
+            <header>
                 <span class="name heading">Name</span>
+                <span class="importance heading">Type</span>
                 <span class="importance heading">Importance</span>
-            </aside>
+            </header>
             <ul id="requirements-list" class="input-list">
                 <li class="requirement   list-card-item   flex-row flex-horiz-stretch">
                     <input type="text" class="name" value="Requirement A" />
@@ -167,10 +168,10 @@
                     <label for="req-1">Requirement A</label>: <input type="range" min="0" max="1" step="0.0001" id="req-1" class="fitness slider"/>
                 </li>
                 <li class="option-requirement   list-card-item">
-                    <label for="req-1">Requirement B</label>: <input type="range" min="0" max="1" step="0.0001" id="req-1" class="fitness slider"/>
+                    <label for="req-1">Requirement B</label>: <input type="range" min="0" max="1" step="0.0001" id="req-2" class="fitness slider"/>
                 </li>
                 <li class="option-requirement   list-card-item">
-                    <label for="req-1">Requirement C</label>: <input type="range" min="0" max="1" step="0.0001" id="req-1" class="fitness slider"/>
+                    <label for="req-1">Requirement C</label>: <input type="range" min="0" max="1" step="0.0001" id="req-3" class="fitness slider"/>
                 </li>
             </ul>
 

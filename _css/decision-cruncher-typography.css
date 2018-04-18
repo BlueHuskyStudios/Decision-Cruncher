@@ -10,10 +10,11 @@
  @import url('https://fonts.googleapis.com/css?family=Frijole');
 
 
-.dc body>header h1 {
-    font-family: 'Frijole', 'Roboto Slab', 'Roboto', 'Helvetica Neue', 'Helvetica', sans-serif;
-    font-size: 2rem;
-    font-weight: normal;
+.dc {
+    --font-family-title: 'Frijole', 'Roboto Slab', 'Roboto', 'Helvetica Neue', 'Helvetica', sans-serif;
+    --font-size-title: 2rem;
+    --font-weight-title: normal;
+    --text-align-title: center;
 }
 
 .dc #inputs .heading {

@@ -1,4 +1,5 @@
 package org.bh.tools.base.math
+import org.bh.tools.base.abstraction.*
 import kotlin.math.pow
 
 /*
@@ -9,9 +10,12 @@ import kotlin.math.pow
 
 
 /**
+ * Converts this number into a string of any base. That base will be equal to the number of characters in the given
+ * string. Note that this algorithm does not remove duplicate characters.
  *
+ * @param baseCharacters The characters that the base uses
  */
-fun Long.toBase(baseCharacters: String): String {
+fun Integer.toBase(baseCharacters: String): String {
     var result = ""
 
     // The following logic is derived from https://math.stackexchange.com/q/111150/317419
@@ -34,14 +38,17 @@ fun Long.toBase(baseCharacters: String): String {
 }
 
 
-fun String.fromBase(baseCharacters: String): Long {
+/**
+ * Converts this string into a number by using the given base, or throws
+ */
+fun String.fromBase(baseCharacters: String): Integer {
     // The following is adapted from https://stackoverflow.com/a/19607537/453435
 
-    var result: Long = 0
+    var result: Integer = 0
     var position = length //we start from the last digit in a String (lowest value)
     for (ch in this) {
         val value = baseCharacters.indexOf(ch)
-        result += (value * baseCharacters.length.toDouble().pow(--position)).toLong() //this is your 1x2(pow 0)+0x2(pow 1)+0x2(pow 2)+1x2(pow 3)
+        result += (value * baseCharacters.length.fractionValue.pow(--position)).toLong() //this is your 1x2(pow 0)+0x2(pow 1)+0x2(pow 2)+1x2(pow 3)
 
     }
     return result

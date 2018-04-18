@@ -1,6 +1,8 @@
 @file:Suppress("PackageDirectoryMismatch")
 package DecisionCruncher
 
+import DecisionCruncher.Requirement.*
+import DecisionCruncher.Requirement.IdealValue.*
 import org.bh.tools.base.util.*
 
 
@@ -26,10 +28,61 @@ class Requirement(
 
 
     sealed class IdealValue(val unit: String?) {
-        class fullRange(val lowestAcceptableValue: Double, val highestAcceptableValue: Double, unit: String?): IdealValue(unit)
-        class leftOpenRange(val highestAcceptableValue: Double, unit: String?): IdealValue(unit)
-        class rightOpenRange(val lowestAcceptableValue: Double, unit: String?): IdealValue(unit)
-        class oneIdealValue(val idealValue: Double, unit: String?): IdealValue(unit)
-        object meaninglessValue: IdealValue(null)
+
+        abstract fun rawWeightFunction(actualValue: Double)
+
+        /**
+         * like this:
+         * ```
+         * 1─┼─          ╴
+         *   │        ╱   |
+         *   │      /      \
+         *   │    /         |
+         * m─┼──╱            ╲─
+         *   │
+         *  ─┼───────────┼────┼─
+         * 0             n    1
+         * ```
+         */
+        class fullRange(val lowestAcceptableValue: Double, val highestAcceptableValue: Double, val idealValue: Double?, unit: String?): IdealValue(unit) {
+            override fun rawWeightFunction(actualValue: Double) {
+                TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+            }
+        }
+
+        class leftOpenRange(val highestAcceptableValue: Double, unit: String?): IdealValue(unit) {
+            override fun rawWeightFunction(actualValue: Double) {
+                TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+            }
+        }
+
+        class rightOpenRange(val lowestAcceptableValue: Double, unit: String?): IdealValue(unit) {
+            override fun rawWeightFunction(actualValue: Double) {
+                TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+            }
+        }
+
+        class oneIdealValue(val idealValue: Double, unit: String?): IdealValue(unit) {
+            override fun rawWeightFunction(actualValue: Double) {
+                TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+            }
+        }
+
+        object meaninglessValue: IdealValue(null) {
+            override fun rawWeightFunction(actualValue: Double) {
+                TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+            }
+        }
+
+    }
+}
+
+
+
+private fun IdealValue.rawWeightFunction() : (Double) -> Double {
+    when (this) {
+        is fullRange -> {
+            return
+        }
     }
 }

@@ -208,6 +208,9 @@ html.dc {
         max-width: calc(50vw - 3rem);
     }
 
+.dc #requirements {
+}
+
 .dc #inputs .importance {
     width: 1in;
     flex-grow: 0;

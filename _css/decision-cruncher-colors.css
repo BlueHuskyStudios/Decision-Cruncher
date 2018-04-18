@@ -1,19 +1,19 @@
-:root.brightness-dark,
+/* :root.brightness-dark,
 :root.brightness-dark :target:not(#TOP) {
     background: #263238;
     color: #ECEFF1;
 }
 
-#inputs .card {
-    background-color: rgba(96, 125, 139, 0.2); /* Material Blue Grey 500 */
-}
+.card {
+    background-color: rgba(96, 125, 139, 0.2); /* Material Blue Grey 500 * /
+} */
 
 .dc #inputs .heading {
     opacity: 0.5;
 }
 
 
-.dc .severe.hero {
+/* .dc .severe.hero {
     background-color: #EEFF41 !important;
     color: #263238;
-}
+} */
