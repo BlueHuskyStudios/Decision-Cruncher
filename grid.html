@@ -13,7 +13,7 @@
     <!-- The following are just locally-served versions of stylesheets at https://Stylesheets.BHStudios.org -->
     <link rel="stylesheet" href="http://localhost:4000/assets/v2/neon/neon-renderer.css" />
     <link rel="stylesheet" href="http://localhost:4000/assets/v2/neon/neon-fire.css" />
-    <link rel="stylesheet" href="http://localhost:4000/assets/v2/neon/neon-water.css" disabled />
+    <!-- <link rel="stylesheet" href="http://localhost:4000/assets/v2/neon/neon-water.css" disabled /> -->
 
     <style type="text/css">
     </style>
@@ -25,7 +25,7 @@
     <header class="app-bar">
         <button class="image-button show-sidebar-button"><i class="material-icons">menu</i></button>
         <h1>Decision Cruncher</h1>
-        <button class="image-button big-ripple"><span class="cta   hidden-until-parent-hover reveal-with-slide-from-right">Fork me on GitHub! </span><i class="fab fa-github fa-2x"></i></button>
+        <a href="#" class="image-button big-ripple"><span class="cta   hidden-until-parent-hover reveal-with-slide-from-right">Fork me on GitHub! </span><i class="fab fa-github fa-2x"></i></a>
     </header>
 
     <main id="contains-cards" class="grid-adaptive widest-wide">
@@ -193,5 +193,14 @@
     </main>
 
     <button class="accent floating-action-button"><i class="material-icons">share</i></button>
+
+
+    <aside class="sidebar">
+        <h2>Style</h2>
+        <ul class="sidebar-items">
+            <li><button id="style-neon-fire">Neon Fire</button></li>
+            <li><button id="style-neon-water">Neon Water</button></li>
+        </ul>
+    </aside>
 </body>
 </html>
