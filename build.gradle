@@ -1,0 +1,17 @@
+plugins {
+    id 'kotlin2js' version '1.2.71'
+}
+
+group 'org.bh'
+version '0.0.1-lambda.1'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compile "org.jetbrains.kotlin:kotlin-stdlib-js"
+    testCompile "org.jetbrains.kotlin:kotlin-test-js"
+}
+
+compileKotlin2Js.kotlinOptions.outputFile = "_js/Decision-Cruncher.js"
