@@ -1,5 +1,7 @@
 package org.bh.tools.base.collections.extensions
 
+import org.bh.tools.base.abstraction.*
+
 /*
  * Copyright BHStudios ©2016 BH-1-PS. Made for Snek.
  *
@@ -149,6 +151,8 @@ inline fun <ElementType> Iterable<ElementType>.firstOrNullComparingPairs(crossin
 
 typealias Reducer<ElementType, ResultType> = (runningValue: ResultType, currentValue: ElementType) -> ResultType
 typealias FastReducer<ElementType, ResultType> = (runningValue: ResultType, currentValue: ElementType) -> Unit
+typealias Processor<Element> = (element: Element) -> Unit
+typealias IndexedProcessor<Element> = (index: Int32, element: Element) -> Unit
 
 
 
@@ -226,3 +230,20 @@ fun <ElementType> Iterable<ElementType>.toString(prefix: CharSequence = "", glue
 @Suppress("NOTHING_TO_INLINE")
 inline fun <ElementType, IterableType: Iterable<ElementType>> IterableType.nonEmpty(): IterableType? = if (count() > 0) this else null
 inline val <ElementType, IterableType: Iterable<ElementType>> IterableType.nonEmpty get() = nonEmpty()
+
+
+
+fun <Element, Self> Self.forEachReversedIndexed(processor: IndexedProcessor<Element>)
+where Self: Collection<Element> {
+    (count() downTo 0).forEach {
+        processor(it, this.elementAt(it))
+    }
+}
+
+
+fun <Element, Self> Self.forEachReversed(processor: Processor<Element>)
+        where Self: Collection<Element> {
+    forEachReversedIndexed { _, element ->
+        processor(element)
+    }
+}

@@ -4,7 +4,6 @@ package DecisionCruncher
 import jQueryInterface.*
 
 
-
 /**
  * @author Ben Leggiero
  * @since 2018-03-09
@@ -13,8 +12,8 @@ import jQueryInterface.*
 fun main(args: Array<String>) {
     jq {
         val requirements = listOf(
-                Requirement(id = "c", name = "Cost", importance = 1.0),
-                Requirement(id = "d", name = "Distance to QT", importance = 0.6)
+                Requirement(id = "c", name = "Cost", idealValue = 1400.0, category = "Financial", importance = 1.0),
+                Requirement(id = "d", name = "Distance to QT", category = "QoL", importance = 0.6)
         )
 
         val options: List<Option> = listOf(

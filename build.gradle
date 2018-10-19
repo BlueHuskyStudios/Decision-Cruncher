@@ -14,4 +14,12 @@ dependencies {
     testCompile "org.jetbrains.kotlin:kotlin-test-js"
 }
 
+sourceSets {
+    main {
+        kotlin {
+            srcDirs 'src/main/kotlin'
+        }
+    }
+}
+
 compileKotlin2Js.kotlinOptions.outputFile = "_js/Decision-Cruncher.js"
