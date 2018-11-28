@@ -1,3 +1,15 @@
 [submodule "lib/Blue-Base"]
 	path = lib/Blue-Base
 	url = https://github.com/BlueHuskyStudios/Blue-Base.git
+[submodule "lib/Blue-Base-JVM"]
+	path = lib/Blue-Base-JVM
+	url = https://github.com/BlueHuskyStudios/Blue-Base-JVM.git
+[submodule "lib/Blue-Base-JS"]
+	path = lib/Blue-Base-JS
+	url = https://github.com/BenLeggiero/Blue-Base-JS.git
+[submodule "lib/Husky-UI"]
+	path = lib/Husky-UI
+	url = https://github.com/BlueHuskyStudios/Husky-UI.git
+[submodule "lib/Husky-UI-JS"]
+	path = lib/Husky-UI-JS
+	url = https://github.com/BlueHuskyStudios/Husky-UI-JS.git
