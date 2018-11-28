@@ -2,7 +2,9 @@ plugins {
     id 'kotlin2js' version '1.2.71'
 }
 
+//noinspection GroovyAssignabilityCheck
 group 'org.bh'
+//noinspection GroovyAssignabilityCheck
 version '0.0.1-lambda.1'
 
 repositories {
@@ -10,14 +12,19 @@ repositories {
 }
 
 dependencies {
+    //noinspection GroovyAssignabilityCheck
     compile "org.jetbrains.kotlin:kotlin-stdlib-js"
+    //noinspection GroovyAssignabilityCheck
     testCompile "org.jetbrains.kotlin:kotlin-test-js"
 }
 
 sourceSets {
     main {
         kotlin {
+            //noinspection GroovyAssignabilityCheck
             srcDirs 'src/main/kotlin'
+            //noinspection GroovyAssignabilityCheck
+            srcDirs 'lib/Blue-Base/src/main/kotlin'
         }
     }
 }
