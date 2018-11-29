@@ -41,7 +41,7 @@ class SerializableDecisionCruncherState(
             return SerializableDecisionCruncherState(
                     id = json[idSerializedName] as? String ?: return null,
                     allOptions = (json[allOptionsSerializedName] as? Array<*> ?: return null).map { SerializableOption(it as? Json ?: return null) ?: return null },
-                    allOptions = (json[allOptionsSerializedName] as? Array<*> ?: return null).map { SerializableOption(it as? Json ?: return null) ?: return null }
+                    allRequirements = TODO()
             )
         }
 
@@ -65,6 +65,7 @@ class SerializableOption(
 
     companion object {
         operator fun invoke(json: Json): SerializableOption? {
+            TODO()
         }
     }
 }
