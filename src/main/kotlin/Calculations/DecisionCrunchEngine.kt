@@ -25,9 +25,9 @@ object DecisionCrunchEngine {
         return this.requirementConformance.entries.reduceTo(0.0) { fitness, (requirementId, conformance) ->
             val requirement = allRequirements.firstOrNull { it.id == requirementId } ?: return@reduceTo fitness
 
-//            TODO("Use lowest and highest values")
+//            TODO("Is this the best way to use ideal values?")
 
-            return@reduceTo fitness + requirement.importance * conformance.value
+            return@reduceTo fitness + (requirement.idealValue.rawWeightFunction(conformance.value) * requirement.importance)
         }
     }
 }
