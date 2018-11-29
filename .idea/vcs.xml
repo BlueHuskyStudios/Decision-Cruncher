@@ -3,5 +3,9 @@
   <component name="VcsDirectoryMappings">
     <mapping directory="" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/lib/Blue-Base" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/lib/Blue-Base-JS" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/lib/Blue-Base-JVM" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/lib/Husky-UI" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/lib/Husky-UI-JS" vcs="Git" />
   </component>
 </project>
