@@ -1,10 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="Kotlin2JsCompilerArguments">
-    <option name="moduleKind" value="umd" />
-    <option name="sourceMap" value="true" />
-  </component>
-  <component name="KotlinCompilerSettings">
-    <option name="outputDirectoryForJsLibraryFiles" value="$PROJECT_DIR$/_js/lib" />
+    <option name="sourceMapEmbedSources" />
   </component>
 </project>

@@ -2,7 +2,7 @@
 
 package jQueryInterface
 
-import RentSplit.*
+import org.bh.tools.base.jsShim.*
 import org.bh.tools.base.util.*
 import org.w3c.dom.*
 import org.w3c.dom.events.*
